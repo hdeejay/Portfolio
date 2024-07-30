@@ -18,15 +18,26 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Typing effect
-    const text = "I am interested in Software Engineering, AI, and machine learning. My experiences include Full Stack Development, Databases, and UI.";
-    let index = 0;
+    const texts = [
+        "I'm interested in Software Engineering, AI, and Machine Learning.",
+        "I have experience in Full-Stack Development, Databases, and UI."
+    ];
+    let textIndex = 0;
+    let charIndex = 0;
     const typingText = document.getElementById('typing-text');
 
     function type() {
-        if (index < text.length) {
-            typingText.innerHTML += text.charAt(index);
-            index++;
-            setTimeout(type, 50); // Adjust typing speed here
+        if (textIndex < texts.length) {
+            if (charIndex < texts[textIndex].length) {
+                typingText.innerHTML += texts[textIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(type, 100); // Adjust typing speed for smoothness
+            } else {
+                charIndex = 0;
+                textIndex++;
+                typingText.innerHTML += '<br>'; // Add a line break between sentences
+                setTimeout(type, 500); // Pause before starting the next sentence
+            }
         }
     }
 
